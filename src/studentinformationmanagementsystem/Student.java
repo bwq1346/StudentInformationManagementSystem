@@ -53,7 +53,58 @@ public class Student extends Person implements Comparable<Student> {
         if (yearLevel < 1 || yearLevel > 8) {
             throw new IllegalArgumentException("Year Level must be between 1 and 8.");
         }
-        */// test ///*
+        this.yearLevel = yearLevel;
     }
     
+    public String getMajor() {
+        return major;
+    }
+    
+    public void setMajor(String major) {
+        this.major = major;
+    }
+    
+    public double getGpa() {
+        return gpa;
+    }
+    
+    public void setGpa(double gpa) {
+        if (gpa < 0.0 || gpa > 4.0) {
+            throw new IllegalArgumentException("GPA must be between 0.0 and 4.0");
+        }
+        this.gpa = gpa;
+    }
+    
+    public StudentStatus getStatus() {
+        return status;
+    }
+    
+    public void setStatus(StudentStatus status) {
+        this.status = status;
+    }
+    
+    public Set<String> getEnrolledCourseCodes() {
+        return enrolledCourseCodes;
+    }
+    
+    public boolean isEnrolledIn(String courseCode) {
+        return enrolledCourseCodes.contains(courseCode);
+    }
+    
+    public void addCourseCode(String courseCode) {
+        enrolledCourseCodes.add(courseCode);
+    }
+    
+    public void removeCourseCode(String courseCode) {
+        enrolledCourseCodes.remove(courseCode);
+    }
+    
+    @Override
+    public int compareTo(Student other) {
+        int gpaCompare = Double.compare(other.gpa, this.gpa);
+        if(gpaCompare != 0) {
+            return gpaCompare;
+        }
+        return this.getName().compareToIgnoreCase(other.getName());
+    } 
 }
