@@ -11,6 +11,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
+ * Pulls together data from all three managers to build the different
+ * report views (system summary, top students, transcripts, rosters) and to
+ * export everything to a text file. This class doesn't store anything
+ * itself - it just reads from the other managers and formats the output.
  *
  * @author Vikra
  */
@@ -27,12 +31,17 @@ public class ReportManager {
         this.enrollmentManager = enrollmentManager;
     }
 
+    // takes anything Reportable (Student, Course, etc.) and prints its
+    // report line - this is the polymorphism paying off, since it doesn't
+    // need to know or care what type is actually in the list
     public void printReportLines(List<? extends Reportable> items) {
         for (Reportable item : items) {
             System.out.println("  " + item.toReportLine());
         }
     }
 
+    // students are already sorted by GPA (see StudentManager.listAllSorted),
+    // so "top N" is really just "take the first N"
     public List<Student> topStudentsByGpa(int topN) {
         List<Student> sorted = studentManager.listAllSorted();
         return sorted.subList(0, Math.min(topN, sorted.size()));
@@ -60,6 +69,8 @@ public class ReportManager {
         sb.append("Roster for ").append(course.getCourseName()).append(" (").append(courseCode).append(")\n");
         sb.append(course).append("\n");
         sb.append("----------------------------------------------------------\n");
+        // enrolled students and waitlisted students are shown separately,
+        // straight from the course's own Set and Queue
         for (String studentId : course.getEnrolledStudentIds()) {
             try {
                 sb.append("  ENROLLED: ").append(studentManager.findStudent(studentId).getSummary()).append("\n");
@@ -83,6 +94,8 @@ public class ReportManager {
         return sb.toString();
     }
 
+    // writes a full snapshot of the system to its own timestamped file,
+    // so you can keep several reports around without overwriting each other
     public String exportFullReport(String outputFolder) {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
         String path = outputFolder + "/report_" + timestamp + ".txt";

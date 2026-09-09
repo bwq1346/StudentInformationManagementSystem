@@ -1,16 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
-
-/**
- *
- * @author Vikra
- */
 
 import java.util.List;
 
+/**
+ * The standard set of create/read/update/delete operations that every
+ * repository in this project supports. It's generic (CrudOperations&lt;T&gt;)
+ * so the same interface works for Student, Teacher, Course and Enrollment
+ * without repeating it four times.
+ */
 public interface CrudOperations<T>
 {
     void add(T item) throws DuplicateRecordException;

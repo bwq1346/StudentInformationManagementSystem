@@ -5,11 +5,14 @@
 package studentinformationmanagementsystem;
 
 /**
+ * The possible states a single enrolment can be in - still going
+ * (ENROLLED), finished with a grade (COMPLETED), or pulled out of the
+ * course (WITHDRAWN).
  *
  * @author Nishal
  */
 public enum EnrollmentStatus {
     ENROLLED,
     COMPLETED,
-    WITHDRAWN    
+    WITHDRAWN
 }

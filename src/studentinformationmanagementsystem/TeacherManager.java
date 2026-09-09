@@ -6,6 +6,9 @@ package studentinformationmanagementsystem;
 import java.util.List;
 
 /**
+ * Business logic for teachers - much simpler than StudentManager since
+ * teachers don't need searching or sorting for this project, just the
+ * standard CRUD plus id generation.
  *
  * @author Nishal
  */
@@ -61,4 +64,3 @@ public class TeacherManager {
         return teacherRepository.count();
     }
 }
-

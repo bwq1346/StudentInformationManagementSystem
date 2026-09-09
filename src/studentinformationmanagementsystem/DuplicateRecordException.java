@@ -5,6 +5,9 @@
 package studentinformationmanagementsystem;
 
 /**
+ * Thrown when something tries to add a record whose id already exists.
+ * In practice this shouldn't happen much since ids are auto-generated, but
+ * it's there as a safety net for the repository layer.
  *
  * @author Nishal
  */

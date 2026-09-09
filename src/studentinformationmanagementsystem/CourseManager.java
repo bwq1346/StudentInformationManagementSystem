@@ -5,21 +5,26 @@
 package studentinformationmanagementsystem;
 
 /**
- *
  * @author Vikra
  */
 
 import java.util.List;
 
+/**
+ * Business logic for courses - creation, updates, deletion, and assigning a
+ * teacher. Unlike students/teachers, a course's id (its course code) is
+ * typed in by the user rather than auto-generated, since course codes like
+ * COMP603 are meant to be human-readable.
+ */
 public class CourseManager
 {
     private final CrudOperations<Course> courseRepository;
-    
+
     public CourseManager(CrudOperations<Course> courseRepository)
     {
         this.courseRepository = courseRepository;
     }
-    
+
     public Course addCourse(String courseCode, String courseName, int creditPoints, int capacity, String teacherId) throws InvalidInputException
     {
         try
@@ -31,10 +36,11 @@ public class CourseManager
         }
         catch (DuplicateRecordException e)
         {
+            // most likely cause: the course code was already used
             throw new InvalidInputException(e.getMessage());
         }
     }
-    
+
     public void updateCourse(String courseCode, String courseName, int creditPoints, int capacity) throws RecordNotFoundException
     {
         Course existing = courseRepository.findById(courseCode);
@@ -44,7 +50,7 @@ public class CourseManager
         courseRepository.update(existing);
         ActivityLogger.log("Updated course " + courseCode);
     }
-    
+
     public void deleteCourse(String courseCode) throws RecordNotFoundException
     {
         courseRepository.delete(courseCode);
@@ -65,7 +71,10 @@ public class CourseManager
     {
         return courseRepository.findAll();
     }
-    
+
+    // updates the course's side of the link only - ConsoleUI is the one
+    // that also tells the Teacher object about it, since this class only
+    // knows about courses, not teachers
     public void assignTeacher(String courseCode, String teacherId) throws RecordNotFoundException
     {
         Course course = courseRepository.findById(courseCode);

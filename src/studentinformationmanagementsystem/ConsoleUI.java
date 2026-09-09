@@ -7,6 +7,12 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
+ * This is the actual text menu that the user sees and types into. It's
+ * intentionally "dumb" - it just reads input, hands it off to the right
+ * manager, and prints whatever comes back. None of the actual business
+ * rules live in here, they're all in the manager classes, which makes this
+ * class a lot easier to follow even though it's the biggest file in the
+ * project.
  *
  * @author Nishal
  */
@@ -25,6 +31,9 @@ public class ConsoleUI {
     private final EnrollmentManager enrollmentManager;
     private final ReportManager reportManager;
 
+    // this constructor is basically all the "wiring" for the app - it
+    // builds the repositories first, then the managers that depend on them,
+    // then finally ReportManager which needs all three managers
     public ConsoleUI() {
         this.studentRepository = new StudentRepository("data/students.txt");
         this.teacherRepository = new TeacherRepository("data/teachers.txt");
@@ -62,6 +71,9 @@ public class ConsoleUI {
                 }
             }
         } finally {
+            // finally makes sure we still save even if something above
+            // throws an exception we didn't expect - don't want to lose
+            // a session's worth of changes over one bug
             saveAllData();
             scanner.close();
         }
@@ -105,6 +117,10 @@ public class ConsoleUI {
         System.out.println("---------------------------------------------------------");
     }
 
+    // ---------------------------------------------------------------
+    // Student Management
+    // ---------------------------------------------------------------
+
     private void studentMenu() {
         boolean back = false;
         while (!back) {
@@ -134,6 +150,9 @@ public class ConsoleUI {
 
     private void addStudent() {
         System.out.println("\n-- Add Student --");
+        // every one of these already comes back validated - InputValidator
+        // won't let a bad value get past its own loop, so this method
+        // doesn't need to check anything itself
         String name = InputValidator.readNonEmptyString(scanner, "Full name: ");
         String email = InputValidator.readEmail(scanner, "Email: ");
         String phone = InputValidator.readPhone(scanner, "Phone: ");
@@ -199,6 +218,9 @@ public class ConsoleUI {
         try {
             Student existing = studentManager.findStudent(id);
             System.out.println("Current record: " + existing.getSummary());
+            // deliberately asking for every field again rather than letting
+            // the user skip fields they don't want to change - simpler to
+            // get right, and avoids weird partial-update bugs
             System.out.println("Enter new values (you must re-enter every field):");
             String name = InputValidator.readNonEmptyString(scanner, "Full name: ");
             String email = InputValidator.readEmail(scanner, "Email: ");
@@ -217,6 +239,8 @@ public class ConsoleUI {
 
     private void deleteStudent() {
         String id = InputValidator.readNonEmptyString(scanner, "\nEnter Student ID to delete: ");
+        // always confirm before an actual delete - too easy to fat-finger
+        // an ID otherwise
         if (!InputValidator.readYesNo(scanner, "Are you sure you want to delete student " + id + "?")) {
             System.out.println("Delete cancelled.");
             return;
@@ -235,6 +259,10 @@ public class ConsoleUI {
                 "ACTIVE", "SUSPENDED", "GRADUATED", "WITHDRAWN");
         return StudentStatus.valueOf(value);
     }
+
+    // ---------------------------------------------------------------
+    // Teacher Management
+    // ---------------------------------------------------------------
 
     private void teacherMenu() {
         boolean back = false;
@@ -324,6 +352,10 @@ public class ConsoleUI {
         }
     }
 
+    // ---------------------------------------------------------------
+    // Course Management
+    // ---------------------------------------------------------------
+
     private void courseMenu() {
         boolean back = false;
         while (!back) {
@@ -351,6 +383,7 @@ public class ConsoleUI {
 
     private void addCourse() {
         System.out.println("\n-- Add Course --");
+        // uppercase the code so "comp603" and "COMP603" end up as the same course
         String code = InputValidator.readNonEmptyString(scanner, "Course code (e.g. COMP603): ").toUpperCase();
         String name = InputValidator.readNonEmptyString(scanner, "Course name: ");
         int credits = InputValidator.readInt(scanner, "Credit points: ", 1, 60);
@@ -358,6 +391,8 @@ public class ConsoleUI {
         String teacherId = null;
         if (InputValidator.readYesNo(scanner, "Assign a teacher now?")) {
             teacherId = InputValidator.readNonEmptyString(scanner, "Teacher ID: ");
+            // still let the course get created even if the id doesn't exist -
+            // just warn about it, rather than blocking the whole thing
             if (!teacherManager.exists(teacherId)) {
                 System.out.println(
                         "Warning: no teacher with that ID exists yet - course saved without a valid teacher link.");
@@ -423,6 +458,9 @@ public class ConsoleUI {
         String code = InputValidator.readNonEmptyString(scanner, "\nEnter Course Code: ").toUpperCase();
         String teacherId = InputValidator.readNonEmptyString(scanner, "Enter Teacher ID: ");
         try {
+            // both sides of the relationship need updating - the course
+            // needs to know its teacher, and the teacher needs the course
+            // added to their own "courses taught" list
             Teacher teacher = teacherManager.findTeacher(teacherId);
             courseManager.assignTeacher(code, teacherId);
             teacher.assignCourse(code);
@@ -431,6 +469,10 @@ public class ConsoleUI {
             System.out.println(e.getMessage());
         }
     }
+
+    // ---------------------------------------------------------------
+    // Enrollment Management
+    // ---------------------------------------------------------------
 
     private void enrollmentMenu() {
         boolean back = false;
@@ -462,6 +504,8 @@ public class ConsoleUI {
         String courseCode = InputValidator.readNonEmptyString(scanner, "Course Code: ").toUpperCase();
         String semester = InputValidator.readNonEmptyString(scanner, "Semester (e.g. 2026S2): ");
         try {
+            // the boolean tells us whether they got a seat or landed on
+            // the waitlist, so we can show the right message either way
             boolean enrolled = enrollmentManager.enrollStudent(studentId, courseCode, semester);
             System.out.println(enrolled
                     ? "Student enrolled successfully."
@@ -521,6 +565,10 @@ public class ConsoleUI {
             enrollments.forEach(System.out::println);
         }
     }
+
+    // ---------------------------------------------------------------
+    // Reports
+    // ---------------------------------------------------------------
 
     private void reportsMenu() {
         boolean back = false;

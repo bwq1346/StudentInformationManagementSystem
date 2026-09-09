@@ -5,7 +5,6 @@
 package studentinformationmanagementsystem;
 
 /**
- *
  * @author Vikra
  */
 
@@ -23,26 +22,37 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
+/**
+ * This is the base for every repository (StudentRepository,
+ * TeacherRepository, CourseRepository, EnrollmentRepository). All four of
+ * them need the exact same CRUD logic and the exact same load/save-to-file
+ * logic, so instead of copy-pasting it four times, it lives here once. Each
+ * subclass only has to say how to turn ONE line of text into an object and
+ * back again (extractId / fromLine / toLine) - everything else is handled
+ * for it.
+ */
 public abstract class AbstractFileRepository<T> implements CrudOperations<T>, FileStorable
 {
+    // in-memory store, keyed by id - LinkedHashMap so records stay in the
+    // order they were added/loaded instead of getting shuffled around
     protected final Map<String, T> recordMap = new LinkedHashMap<>();
-    
+
     private final String filePath;
-    
+
     protected AbstractFileRepository(String filePath)
     {
         this.filePath = filePath;
         ensureDataFolderExists();
     }
-    
+
+    // these three are what actually differ between a Student repo and a
+    // Course repo etc. - everything below this point is generic
     protected abstract String extractId(T item);
-    
+
     protected abstract T fromLine(String line);
-    
+
     protected abstract String toLine(T item);
-    
+
     @Override
     public void add(T item) throws DuplicateRecordException
     {
@@ -53,7 +63,7 @@ public abstract class AbstractFileRepository<T> implements CrudOperations<T>, Fi
         }
         recordMap.put(id, item);
     }
-    
+
     @Override
     public void update(T item) throws RecordNotFoundException
     {
@@ -64,7 +74,7 @@ public abstract class AbstractFileRepository<T> implements CrudOperations<T>, Fi
         }
         recordMap.put(id, item);
     }
-    
+
     @Override
     public void delete(String id) throws RecordNotFoundException
     {
@@ -74,7 +84,7 @@ public abstract class AbstractFileRepository<T> implements CrudOperations<T>, Fi
         }
         recordMap.remove(id);
     }
-    
+
     @Override
     public T findById(String id) throws RecordNotFoundException
     {
@@ -85,10 +95,12 @@ public abstract class AbstractFileRepository<T> implements CrudOperations<T>, Fi
         }
         return item;
     }
-    
+
     @Override
     public List<T> findAll()
     {
+        // returning a new list rather than the map's own values - so
+        // whoever calls this can't accidentally mess with our internal state
         return new ArrayList<>(recordMap.values());
     }
 
@@ -103,30 +115,33 @@ public abstract class AbstractFileRepository<T> implements CrudOperations<T>, Fi
     {
         return recordMap.size();
     }
-    
+
     @Override
     public void loadFromFile()
     {
         File file = new File(filePath);
-        
+
+        // first run ever - there's no file yet, which is fine, just start empty
         if (!file.exists())
         {
             return;
         }
 
         int loadedCount = 0;
-        
+
         try (BufferedReader reader = new BufferedReader(new FileReader(file)))
         {
             String line;
-            
+
             while((line = reader.readLine()) != null)
             {
                 if (line.isBlank())
                 {
                     continue;
                 }
-                
+
+                // if one line is corrupted/unparseable, log it and keep
+                // going instead of letting the whole file load fail
                 try
                 {
                     T item = fromLine(line);
@@ -138,9 +153,9 @@ public abstract class AbstractFileRepository<T> implements CrudOperations<T>, Fi
                     ActivityLogger.log("WARNING: could not parse line in " + filePath + " -> " + line);
                 }
             }
-            
+
             ActivityLogger.log("Loaded " + loadedCount + " record(s) from " + filePath);
-            
+
         }
         catch(FileNotFoundException e)
         {
@@ -151,10 +166,12 @@ public abstract class AbstractFileRepository<T> implements CrudOperations<T>, Fi
             System.out.println("Warning: could not read data file '" + filePath + "' (" + e.getMessage() + ").");
         }
     }
-    
+
     @Override
     public void saveToFile()
     {
+        // just rewrites the whole file from what's currently in memory -
+        // simple, and fine for the amount of data this project deals with
         try(PrintWriter writer = new PrintWriter(new FileWriter(filePath)))
         {
             Iterator<Map.Entry<String, T>> it = recordMap.entrySet().iterator();
@@ -170,7 +187,9 @@ public abstract class AbstractFileRepository<T> implements CrudOperations<T>, Fi
             System.out.println("Warning: could not write data file '" + filePath + "' (" + e.getMessage() + ").");
         }
     }
-    
+
+    // makes sure the data/ folder actually exists before we try to read or
+    // write a file inside it - saves every subclass from worrying about this
     private void ensureDataFolderExists()
     {
         File file = new File(filePath);

@@ -5,6 +5,9 @@
 package studentinformationmanagementsystem;
 
 /**
+ * The possible states a student can be in. ACTIVE is what most students
+ * will be - the rest cover a student on leave, one who's finished their
+ * study, or one who's dropped out.
  *
  * @author Nishal
  */

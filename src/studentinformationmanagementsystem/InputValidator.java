@@ -7,11 +7,18 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 /**
+ * All the console input reading lives here so it's not scattered across
+ * ConsoleUI. Every method loops until the user actually types something
+ * valid, so by the time a value gets back to the caller it's already
+ * guaranteed to be well-formed - the rest of the program doesn't have to
+ * double-check it.
  *
  * @author Vikra
  */
 public final class InputValidator {
 
+    // fairly loose checks - not trying to be a full RFC-compliant email/phone
+    // validator, just enough to catch obvious typos
     private static final Pattern EMAIL_PATTERN = Pattern.compile("^[\\w.+-]+@[\\w-]+(\\.[\\w-]+)*\\.[a-zA-Z]{2,}$");
     private static final Pattern PHONE_PATTERN = Pattern.compile("^[0-9+()\\-\\s]{6,15}$");
 
@@ -22,6 +29,8 @@ public final class InputValidator {
         while (true) {
             System.out.print(prompt);
             String input = scanner.nextLine().trim();
+            // commas aren't allowed since our files are comma-separated -
+            // letting one through would silently corrupt the saved data
             if (!input.isEmpty() && input.indexOf(',') < 0) {
                 return input;
             }
@@ -51,6 +60,8 @@ public final class InputValidator {
         }
     }
 
+    // used for anything numeric with a sensible range - year level, credit
+    // points, capacity, menu choices, etc.
     public static int readInt(Scanner scanner, String prompt, int min, int max) {
         while (true) {
             System.out.print(prompt);
@@ -68,6 +79,7 @@ public final class InputValidator {
         }
     }
 
+    // same idea as readInt but for GPA / grades, which need decimals
     public static double readDouble(Scanner scanner, String prompt, double min, double max) {
         while (true) {
             System.out.print(prompt);
@@ -85,6 +97,8 @@ public final class InputValidator {
         }
     }
 
+    // for things like status (ACTIVE/SUSPENDED/...) where only a fixed list
+    // of values makes sense - case-insensitive so "active" still works
     public static String readOneOf(Scanner scanner, String prompt, String... allowedValues) {
         while (true) {
             System.out.print(prompt);
@@ -112,6 +126,7 @@ public final class InputValidator {
         }
     }
 
+    // just reuses readInt - a menu choice is really just an int in a range (0 to however many options there are)
     public static int readMenuChoice(Scanner scanner, String prompt, int min, int max) {
         return readInt(scanner, prompt, min, max);
     }

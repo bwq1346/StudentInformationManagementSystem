@@ -6,6 +6,10 @@ package studentinformationmanagementsystem;
 import java.util.Objects;
 
 /**
+ * Links one student to one course for one semester. This is basically the
+ * "join table" of the system - it's what makes it possible for a student to
+ * be in more than one course, and a course to have more than one student,
+ * each with their own grade and status.
  *
  * @author Nishal
  */
@@ -15,9 +19,9 @@ public class Enrollment implements Reportable {
     private final String studentId;
     private final String courseCode;
     private final String semester;
-    private Double grade;
+    private Double grade; // Double, not double, so it can be null until a grade's actually recorded
     private EnrollmentStatus status;
-    
+
     public Enrollment(String enrollmentId, String studentId, String courseCode,
                        String semester, Double grade, EnrollmentStatus status) {
         this.enrollmentId = enrollmentId;
@@ -66,7 +70,8 @@ public class Enrollment implements Reportable {
     public boolean isPassing() {
         return grade != null && grade >= 50.0;
     }
-    
+
+    // just a simple grade -> letter grade lookup, highest first
     public String getLetterGrade() {
         if (grade == null) {
             return "N/A";
@@ -96,6 +101,9 @@ public class Enrollment implements Reportable {
                 grade == null ? "N/A" : String.format("%.1f", grade), getLetterGrade(), status);
     }
 
+    // an enrolment is identified by its own id, not by the student/course
+    // combo - that way the same student can enrol in the same course again
+    // in a later semester and it's a different record
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -112,5 +120,3 @@ public class Enrollment implements Reportable {
         return Objects.hash(enrollmentId);
     }
 }
-
-   

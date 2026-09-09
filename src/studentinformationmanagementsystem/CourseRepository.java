@@ -5,29 +5,38 @@
 package studentinformationmanagementsystem;
 
 /**
- *
  * @author Vikra
  */
 
 import java.util.StringTokenizer;
 
+/**
+ * Same pattern again, this time for Course records. This one has two
+ * semicolon-separated lists to deal with instead of one - the enrolled
+ * students and the waitlist - since a course needs to remember both across
+ * a restart.
+ *
+ * Line format:
+ * code,name,creditPoints,capacity,teacherId,student1;student2;...,waitStudent1;waitStudent2;...
+ */
 public class CourseRepository extends AbstractFileRepository<Course>
 {
     public CourseRepository(String filePath)
     {
         super(filePath);
     }
-    
+
     @Override
     protected String extractId(Course item)
     {
         return item.getCourseCode();
     }
-    
+
     @Override
     protected Course fromLine(String line)
     {
         String[] parts = line.split(",", -1);
+        // teacher might not be assigned yet, in which case this field is blank
         String teacherId = parts[4].trim().isEmpty() ? null : parts[4].trim();
         Course course = new Course
         (
@@ -38,6 +47,7 @@ public class CourseRepository extends AbstractFileRepository<Course>
                 teacherId
         );
 
+        // rebuild the enrolled-students set from the semicolon list
         if(parts.length > 5 && !parts[5].isBlank())
         {
             StringTokenizer enrolledTokens = new StringTokenizer(parts[5].trim(), ";");
@@ -46,7 +56,10 @@ public class CourseRepository extends AbstractFileRepository<Course>
                 course.getEnrolledStudentIds().add(enrolledTokens.nextToken().trim());
             }
         }
-        
+
+        // and the waitlist queue from its own semicolon list - order matters
+        // here since it's a queue, and StringTokenizer hands tokens back in
+        // the order they appear, so the waiting order is preserved
         if(parts.length > 6 && !parts[6].isBlank())
         {
             StringTokenizer waitTokens = new StringTokenizer(parts[6].trim(), ";");
@@ -57,7 +70,7 @@ public class CourseRepository extends AbstractFileRepository<Course>
         }
         return course;
     }
-    
+
     @Override
     protected String toLine(Course item)
     {

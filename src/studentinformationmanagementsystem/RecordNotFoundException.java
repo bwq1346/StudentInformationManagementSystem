@@ -5,6 +5,9 @@
 package studentinformationmanagementsystem;
 
 /**
+ * Thrown whenever code looks up, updates or deletes a record by an id that
+ * doesn't actually exist - e.g. searching for a student ID that was never
+ * added, or was already deleted.
  *
  * @author Nishal
  */

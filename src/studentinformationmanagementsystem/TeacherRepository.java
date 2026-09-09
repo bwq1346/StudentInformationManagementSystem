@@ -5,12 +5,17 @@
 package studentinformationmanagementsystem;
 
 /**
- *
  * @author Vikra
  */
 
 import java.util.StringTokenizer;
 
+/**
+ * Same idea as StudentRepository, just for Teacher records.
+ *
+ * Line format:
+ * id,name,email,phone,department,course1;course2;...
+ */
 public class TeacherRepository extends AbstractFileRepository<Teacher>
 {
     public TeacherRepository(String filePath)
@@ -23,12 +28,12 @@ public class TeacherRepository extends AbstractFileRepository<Teacher>
     {
         return item.getId();
     }
-    
+
     @Override
     protected Teacher fromLine(String line)
     {
         String[] parts = line.split(",", -1);
-        
+
         Teacher teacher = new Teacher
         (
                 parts[0].trim(),
@@ -37,35 +42,36 @@ public class TeacherRepository extends AbstractFileRepository<Teacher>
                 parts[3].trim(),
                 parts[4].trim()
         );
-        
+
+        // courses taught, packed the same way student course codes are
         if(parts.length > 5 && !parts[5].isBlank())
         {
             StringTokenizer tokenizer = new StringTokenizer(parts[5].trim(), ";");
-            
+
             while(tokenizer.hasMoreTokens())
             {
                 teacher.assignCourse(tokenizer.nextToken().trim());
             }
         }
-        
+
         return teacher;
     }
-    
+
     @Override
     protected String toLine(Teacher item)
     {
         StringBuilder courses = new StringBuilder();
-        
+
         for(String code : item.getCoursesTaught())
         {
             if(courses.length() > 0)
             {
                 courses.append(";");
             }
-            
+
             courses.append(code);
         }
-        
+
         return String.join
         (       ",",
                 item.getId(),
