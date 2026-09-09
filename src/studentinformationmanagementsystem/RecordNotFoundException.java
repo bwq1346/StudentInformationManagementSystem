@@ -1,18 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 /**
- * Thrown whenever code looks up, updates or deletes a record by an id that
- * doesn't actually exist - e.g. searching for a student ID that was never
- * added, or was already deleted.
+ * Custom checked exception thrown when a queried ID does not exist in repositories.
  *
- * @author Nishal
+ * Attribution:
+ * - Assisted by Claude AI; refactored by Nishal[cite: 5].
+ *
+ * References:
+ * - Horstmann, C. S., & Cornell, G. (2012). Core Java: Volume I—Fundamentals (9th ed.). Prentice Hall[cite: 1].
+ *
+ * @author Nishal Kinattukarayil Biju
  */
 public class RecordNotFoundException extends Exception {
-    private static final long serialVersionUID = 1L;
     public RecordNotFoundException(String message) {
         super(message);
     }

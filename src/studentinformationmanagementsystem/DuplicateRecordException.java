@@ -1,18 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 /**
- * Thrown when something tries to add a record whose id already exists.
- * In practice this shouldn't happen much since ids are auto-generated, but
- * it's there as a safety net for the repository layer.
+ * Custom checked exception thrown when an entity with an existing ID is inserted.
  *
- * @author Nishal
+ * Attribution:
+ * - Assisted by Claude AI; refactored by Nishal to pass customized error details to superclass[cite: 5].
+ *
+ * References:
+ * - Horstmann, C. S., & Cornell, G. (2012). Core Java: Volume I—Fundamentals (Exception Handling)[cite: 1].
+ *
+ * @author Nishal Kinattukarayil Biju
  */
 public class DuplicateRecordException extends Exception {
-    private static final long serialVersionUID = 1L;
     public DuplicateRecordException(String message) {
         super(message);
     }
