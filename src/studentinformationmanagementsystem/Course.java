@@ -53,7 +53,7 @@ public class Course implements Reportable {
         return true;
     }
     
-    public String withdraen(String studentId) {
+    public String withdraw(String studentId) {
         boolean wasEnrolled = enrolledStudentIds.remove(studentId);
         waitlist.remove(studentId);
         
@@ -65,7 +65,7 @@ public class Course implements Reportable {
         return null;
     }
     
-    public String getrCourseCode() {
+    public String getCourseCode() {
         return courseCode;
     }
     
@@ -80,6 +80,10 @@ public class Course implements Reportable {
     public int getCreditPoints() {
         return creditPoints;
     }
+
+    public void setCreditPoints(int creditPoints) {
+        this.creditPoints = creditPoints;
+    }
     
     public int getCapacity() {
         return capacity;
@@ -89,7 +93,7 @@ public class Course implements Reportable {
         this.capacity = capacity;
     }
     
-    public String getTeaccherId() {
+    public String getTeacherId() {
         return teacherId;
     }
     
@@ -129,5 +133,3 @@ public class Course implements Reportable {
         return Objects.hash(courseCode);
     }
 }
-
-

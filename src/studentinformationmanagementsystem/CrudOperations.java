@@ -11,12 +11,8 @@ package studentinformationmanagementsystem;
 
 import java.util.List;
 
-
-public class CrudOperations
+public interface CrudOperations<T>
 {
-    public interface CrudOperations<T>
-    {
-
     void add(T item) throws DuplicateRecordException;
 
     void update(T item) throws RecordNotFoundException;
@@ -30,5 +26,4 @@ public class CrudOperations
     boolean existsById(String id);
 
     int count();
-    }
 }

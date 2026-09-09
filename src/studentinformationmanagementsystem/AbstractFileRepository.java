@@ -25,7 +25,7 @@ import java.util.Map;
 
 
 
-public class AbstractFileRepository<T> implements CrudOperations<T>, FileStorable
+public abstract class AbstractFileRepository<T> implements CrudOperations<T>, FileStorable
 {
     protected final Map<String, T> recordMap = new LinkedHashMap<>();
     
