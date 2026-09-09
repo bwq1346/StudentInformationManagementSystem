@@ -37,7 +37,23 @@ public class Student extends Person implements Comparable<Student> {
     @Override
     public String getSummary() {
         return String.format("[STUDENT] ID: %-8s Name: %-20s Year: %d Major: %-15s GPA: %.2f Status: %s Courses: %d", 
-                getId(), getName(), yearLevel, major)
+                getId(), getName(), yearLevel, major, gpa, status, enrolledCourseCodes.size());
+    }
+    
+    @Override
+    public String toReportLine() {
+        return getId() + "," + getName() + "," + major + "," + yearLevel + "," + String.format("%.2f", gpa) + "," + status;
+    }
+    
+    public int getYearLevel() {
+        return yearLevel;
+    }
+    
+    public void setYearLevel(int yearLevel) {
+        if (yearLevel < 1 || yearLevel > 8) {
+            throw new IllegalArgumentException("Year Level must be between 1 and 8.");
+        }
+        */// test ///*
     }
     
 }
