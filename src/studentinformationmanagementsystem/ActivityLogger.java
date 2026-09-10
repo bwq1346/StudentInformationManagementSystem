@@ -19,7 +19,7 @@ import java.time.format.DateTimeFormatter;
  * Claude AI; implemented using PrintWriter/FileOutputStream — see AI
  * Interaction Log.
  *
- * @author Vikra
+ * @author Vikram Bugata
  */
 public final class ActivityLogger {
 

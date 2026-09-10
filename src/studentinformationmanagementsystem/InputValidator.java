@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * Regex validation logic drafted with assistance from Claude AI; modified to
  * use InvalidInputException — see AI Interaction Log.
  *
- * @author Vikra
+ * @author Vikram Bugata
  */
 public final class InputValidator {
 

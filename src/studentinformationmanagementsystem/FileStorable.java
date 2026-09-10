@@ -10,7 +10,7 @@ package studentinformationmanagementsystem;
  * would necessarily need file storage, so splitting it out keeps the two
  * ideas separate (this is basically Interface Segregation from SOLID).
  *
- * @author Vikra
+ * @author Vikram Bugata
  */
 
 public interface FileStorable

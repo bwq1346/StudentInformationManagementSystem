@@ -5,7 +5,7 @@
 package studentinformationmanagementsystem;
 
 /**
- * @author Vikra
+ * @author Vikram Bugata
  */
 
 /**

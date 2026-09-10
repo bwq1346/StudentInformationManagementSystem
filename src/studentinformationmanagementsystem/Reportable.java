@@ -10,7 +10,7 @@ package studentinformationmanagementsystem;
  * differently, which is the whole point - ReportManager can just call
  * toReportLine() without caring what kind of object it's actually holding.
  *
- * @author Nishal
+ * @author Vikram Bugata
  */
 public interface Reportable {
     String toReportLine();

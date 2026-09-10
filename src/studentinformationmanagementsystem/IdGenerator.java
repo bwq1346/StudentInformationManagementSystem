@@ -12,7 +12,7 @@ import java.util.function.Function;
  * id back out of any type of record (Student, Teacher, Enrollment...)
  * without needing a separate version of this class for each one.
  *
- * @author Vikra
+ * @author Vikram Bugata
  */
 public final class IdGenerator {
 

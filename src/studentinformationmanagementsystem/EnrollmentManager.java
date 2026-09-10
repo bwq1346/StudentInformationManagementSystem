@@ -6,7 +6,7 @@ package studentinformationmanagementsystem;
 import java.util.ArrayList;
 import java.util.List;
 /**
- * @author Vikra
+ * @author Vikram Bugata
  */
 /**
  * Business logic for enrolments. This is the one manager that needs to talk

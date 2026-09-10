@@ -7,6 +7,9 @@ import java.util.List;
  * repository in this project supports. It's generic (CrudOperations&lt;T&gt;)
  * so the same interface works for Student, Teacher, Course and Enrollment
  * without repeating it four times.
+ * 
+ * @author Vikram Bugata
+ * 
  */
 public interface CrudOperations<T>
 {

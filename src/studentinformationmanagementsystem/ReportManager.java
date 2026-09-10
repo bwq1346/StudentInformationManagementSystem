@@ -20,7 +20,7 @@ import java.util.List;
  * assistance from Claude AI using Java 8 streams; rewritten with for-each
  * loops, ArrayList and HashMap instead — see AI Interaction Log.
  * 
- * @author Vikra
+ * @author Vikram Bugata
  */
 public class ReportManager {
 
