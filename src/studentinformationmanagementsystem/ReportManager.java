@@ -16,6 +16,10 @@ import java.util.List;
  * export everything to a text file. This class doesn't store anything
  * itself - it just reads from the other managers and formats the output.
  *
+ * Analytics logic (average grades, pass rates, top students) drafted with
+ * assistance from Claude AI using Java 8 streams; rewritten with for-each
+ * loops, ArrayList and HashMap instead — see AI Interaction Log.
+ * 
  * @author Vikra
  */
 public class ReportManager {

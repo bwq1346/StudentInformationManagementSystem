@@ -30,6 +30,10 @@ import java.util.Map;
  * subclass only has to say how to turn ONE line of text into an object and
  * back again (extractId / fromLine / toLine) - everything else is handled
  * for it.
+ * 
+ * Generic file-repository structure drafted with assistance from Claude AI;
+ * rejected java.nio approach, implemented with BufferedReader/PrintWriter and
+ * FileStorable contract instead — see AI Interaction Log.
  */
 public abstract class AbstractFileRepository<T> implements CrudOperations<T>, FileStorable
 {

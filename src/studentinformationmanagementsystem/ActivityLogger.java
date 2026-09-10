@@ -14,6 +14,10 @@ import java.time.format.DateTimeFormatter;
  * happens (a record added, updated, deleted, or an error). It's separate
  * from the console output on purpose - this way there's a record of what
  * happened even after the console window is closed.
+ * 
+ * * Append-only timestamped logging approach drafted with assistance from
+ * Claude AI; implemented using PrintWriter/FileOutputStream — see AI
+ * Interaction Log.
  *
  * @author Vikra
  */

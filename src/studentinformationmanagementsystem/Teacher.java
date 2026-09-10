@@ -9,6 +9,9 @@ import java.util.List;
 /**
  * A teacher record. Extends Person and adds a department plus the list of
  * course codes this teacher is currently assigned to.
+ * 
+ * Class structure drafted with assistance from Claude AI; simplified from
+ * suggested Undergraduate/Postgraduate hierarchy — see AI Interaction Log.
  *
  * @author Nishal
  */

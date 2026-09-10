@@ -11,6 +11,10 @@ import java.util.Set;
  * (year level, major, GPA, status) plus the set of course codes the
  * student is currently enrolled in.
  *
+ * Class structure (incl. StudentStatus enum) drafted with assistance from
+ * Claude AI; simplified from suggested Undergraduate/Postgraduate hierarchy
+ * — see AI Interaction Log.
+ * 
  * @author Nishal
  */
 public class Student extends Person implements Comparable<Student> {

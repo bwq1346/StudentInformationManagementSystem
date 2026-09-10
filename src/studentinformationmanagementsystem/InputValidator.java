@@ -12,6 +12,9 @@ import java.util.regex.Pattern;
  * valid, so by the time a value gets back to the caller it's already
  * guaranteed to be well-formed - the rest of the program doesn't have to
  * double-check it.
+ * 
+ * Regex validation logic drafted with assistance from Claude AI; modified to
+ * use InvalidInputException — see AI Interaction Log.
  *
  * @author Vikra
  */

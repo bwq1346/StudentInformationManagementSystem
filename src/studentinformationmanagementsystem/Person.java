@@ -10,6 +10,10 @@ import java.util.Objects;
  * counts as a "person" in this system. Holds the fields both of them need
  * (id, name, email, phone) and leaves the person-specific stuff for the
  * subclasses to fill in.
+ * 
+ * Abstract base class structure drafted with assistance from Claude AI;
+ * fields changed to private with getters/setters for full encapsulation —
+ * see AI Interaction Log.
  *
  * @author Nishal
  */
