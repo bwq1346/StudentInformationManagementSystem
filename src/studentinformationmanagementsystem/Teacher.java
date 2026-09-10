@@ -13,7 +13,7 @@ import java.util.List;
  * Class structure drafted with assistance from Claude AI; simplified from
  * suggested Undergraduate/Postgraduate hierarchy — see AI Interaction Log.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public class Teacher extends Person {
     private String department;

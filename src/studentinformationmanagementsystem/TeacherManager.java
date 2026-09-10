@@ -10,7 +10,7 @@ import java.util.List;
  * teachers don't need searching or sorting for this project, just the
  * standard CRUD plus id generation.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public class TeacherManager {
 

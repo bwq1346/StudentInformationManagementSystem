@@ -15,7 +15,7 @@ import java.util.Set;
  * Claude AI; simplified from suggested Undergraduate/Postgraduate hierarchy
  * — see AI Interaction Log.
  * 
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public class Student extends Person implements Comparable<Student> {
 

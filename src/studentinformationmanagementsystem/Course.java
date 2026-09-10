@@ -15,7 +15,7 @@ import java.util.Set;
  * full, new students go into a Queue-based waitlist instead of being
  * rejected outright.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public class Course implements Reportable {
     private String courseCode;

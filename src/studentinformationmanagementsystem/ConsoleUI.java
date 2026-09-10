@@ -14,7 +14,7 @@ import java.util.Scanner;
  * class a lot easier to follow even though it's the biggest file in the
  * project.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju & Vikram Bugata
  */
 public class ConsoleUI {
 

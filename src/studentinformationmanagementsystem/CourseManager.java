@@ -5,7 +5,7 @@
 package studentinformationmanagementsystem;
 
 /**
- * @author Vikra
+ * @author Nishal Kinattukarayil Biju
  */
 
 import java.util.List;

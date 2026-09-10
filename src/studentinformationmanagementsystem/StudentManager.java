@@ -12,7 +12,7 @@ import java.util.List;
  * searching, sorting, and working out stats - so ConsoleUI doesn't have to
  * know anything about how students are stored.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public class StudentManager {
 

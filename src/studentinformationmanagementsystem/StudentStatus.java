@@ -9,7 +9,7 @@ package studentinformationmanagementsystem;
  * will be - the rest cover a student on leave, one who's finished their
  * study, or one who's dropped out.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public enum StudentStatus {
     ACTIVE,

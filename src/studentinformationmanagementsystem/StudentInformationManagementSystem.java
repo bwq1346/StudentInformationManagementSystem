@@ -10,7 +10,7 @@ import java.io.File;
  * just makes sure the data folder and activity log exist, then hands
  * control over to ConsoleUI, which runs until the user chooses to exit.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju & Vikram Bugata
  */
 public class StudentInformationManagementSystem {
 

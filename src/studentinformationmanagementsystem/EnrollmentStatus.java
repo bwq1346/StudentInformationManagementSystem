@@ -9,7 +9,7 @@ package studentinformationmanagementsystem;
  * (ENROLLED), finished with a grade (COMPLETED), or pulled out of the
  * course (WITHDRAWN).
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public enum EnrollmentStatus {
     ENROLLED,

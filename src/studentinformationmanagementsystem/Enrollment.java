@@ -11,7 +11,7 @@ import java.util.Objects;
  * be in more than one course, and a course to have more than one student,
  * each with their own grade and status.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public class Enrollment implements Reportable {
 

@@ -10,7 +10,7 @@ package studentinformationmanagementsystem;
  * this here too means the rule still gets enforced even if a manager method
  * gets called directly instead of through the menu.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public class InvalidInputException extends Exception {
     private static final long serialVersionUID = 1L;

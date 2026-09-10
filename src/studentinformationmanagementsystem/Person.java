@@ -15,7 +15,7 @@ import java.util.Objects;
  * fields changed to private with getters/setters for full encapsulation —
  * see AI Interaction Log.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public abstract class Person implements Reportable {
     private String id;
