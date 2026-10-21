@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package studentinformationmanagementsystem;
+import javax.swing.JPanel;
 
 /**
  * Common contract for the three entity input forms (Student/Teacher/

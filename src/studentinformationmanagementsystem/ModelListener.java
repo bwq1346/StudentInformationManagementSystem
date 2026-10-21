@@ -13,6 +13,6 @@ package studentinformationmanagementsystem;
  * 
  * @author Nishal
  */
-public class ModelListener {
+public interface ModelListener {
     void onDataChanged();
 }
