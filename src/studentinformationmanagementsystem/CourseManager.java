@@ -1,21 +1,13 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 /**
+ * Business logic for courses, sitting between the UI and the repository.
+ *
  * @author Nishal Kinattukarayil Biju
  */
 
 import java.util.List;
 
-/**
- * Business logic for courses - creation, updates, deletion, and assigning a
- * teacher. Unlike students/teachers, a course's id (its course code) is
- * typed in by the user rather than auto-generated, since course codes like
- * COMP603 are meant to be human-readable.
- */
 public class CourseManager
 {
     private final CrudOperations<Course> courseRepository;
@@ -36,7 +28,6 @@ public class CourseManager
         }
         catch (DuplicateRecordException e)
         {
-            // most likely cause: the course code was already used
             throw new InvalidInputException(e.getMessage());
         }
     }
@@ -61,7 +52,8 @@ public class CourseManager
     {
         return courseRepository.findById(courseCode);
     }
-   
+
+    // persists a Course that was changed elsewhere (e.g. by EnrollmentManager)
     public void saveCourse(Course course) throws RecordNotFoundException
     {
         courseRepository.update(course);
@@ -77,9 +69,6 @@ public class CourseManager
         return courseRepository.findAll();
     }
 
-    // updates the course's side of the link only - ConsoleUI is the one
-    // that also tells the Teacher object about it, since this class only
-    // knows about courses, not teachers
     public void assignTeacher(String courseCode, String teacherId) throws RecordNotFoundException
     {
         Course course = courseRepository.findById(courseCode);

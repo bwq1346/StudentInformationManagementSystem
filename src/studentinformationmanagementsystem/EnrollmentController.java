@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import java.awt.GridLayout;
@@ -15,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
+ * Handles button actions on the Enrolments tab.
  *
  * @author Vikram Bugata
  */
@@ -57,6 +54,7 @@ public class EnrollmentController implements ActionListener
                 enrollmentView.onDataChanged();
             }
         } catch (RuntimeException ex) {
+            // DAOs wrap SQLExceptions in RuntimeException
             showWarning(ex.getMessage(), "Database error");
             enrollmentView.onDataChanged();
         }
@@ -166,6 +164,7 @@ public class EnrollmentController implements ActionListener
         }
 
         try {
+            // check the waitlist before withdrawing so we can report who got promoted
             Course before = courseManager.findCourse(courseCode);
             boolean wasSeated = before.getEnrolledStudentIds().contains(studentId);
             String nextInLine = before.getWaitlist().peek();
@@ -203,7 +202,7 @@ public class EnrollmentController implements ActionListener
         String input = JOptionPane.showInputDialog(enrollmentView,
                 "Grade for " + enrollmentId + " (0 - 100):");
         if (input == null || input.trim().isEmpty()) {
-            return; // cancelled
+            return;
         }
 
         double grade;
@@ -215,7 +214,7 @@ public class EnrollmentController implements ActionListener
         }
 
         try {
-            enrollmentManager.recordGrade(enrollmentId, grade); // range check (0-100) happens in Enrollment.setGrade
+            enrollmentManager.recordGrade(enrollmentId, grade);
             enrollmentView.onDataChanged();
         } catch (RecordNotFoundException | InvalidInputException ex) {
             showWarning(ex.getMessage(), "Could not record grade");

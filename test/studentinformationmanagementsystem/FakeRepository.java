@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import java.util.ArrayList;
@@ -11,8 +7,9 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
+ * In-memory CrudOperations used so the manager tests don't need a database.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public class FakeRepository<T> implements CrudOperations<T> {
 

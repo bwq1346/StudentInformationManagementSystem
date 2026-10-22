@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import java.sql.Connection;
@@ -12,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Derby-backed CrudOperations for teachers.
  *
  * @author Vikram Bugata
  */
@@ -64,11 +61,9 @@ public class TeacherDAO implements CrudOperations<Teacher>
         }
     }
 
-    // Deleting a teacher also clears COURSE.TEACHER_ID on any course they
-    // taught, so no course is left pointing at a teacher who doesn't exist.
-    // Both statements run as one transaction: either both happen or neither.
     @Override
     public void delete(String id) throws RecordNotFoundException {
+        // unassigns the teacher from their courses before deleting, in one transaction
         try {
             connection.setAutoCommit(false);
             try (PreparedStatement unassign = connection.prepareStatement(
@@ -86,7 +81,7 @@ public class TeacherDAO implements CrudOperations<Teacher>
                 connection.rollback();
                 throw e;
             } finally {
-                connection.setAutoCommit(true); // back to DBConnectionManager's write-through default
+                connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
             throw new RuntimeException("Could not delete teacher " + id + ": " + e.getMessage(), e);

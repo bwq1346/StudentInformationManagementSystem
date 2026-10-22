@@ -1,9 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-
 package studentinformationmanagementsystem;
 
 import java.sql.Connection;
@@ -16,6 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Derby-backed CrudOperations for students.
+ *
  * @author Vikram Bugata
  */
 public class StudentDAO implements CrudOperations<Student>
@@ -87,6 +83,7 @@ public class StudentDAO implements CrudOperations<Student>
     @Override
     public void delete(String id) throws RecordNotFoundException
     {
+        // removes the student's enrolments and course references in one transaction
         try
         {
             connection.setAutoCommit(false);
@@ -231,6 +228,7 @@ public class StudentDAO implements CrudOperations<Student>
         return student;
     }
 
+    // LIKE narrows the rows; the exact match is checked in Java so "STU1" doesn't hit "STU10"
     private void removeFromListColumn(String table, String idColumn, String listColumn, String value)
             throws SQLException
     {

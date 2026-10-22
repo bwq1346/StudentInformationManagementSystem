@@ -1,18 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 /**
- * Translates StudentView button clicks into StudentManager calls, and
- * turns any exception StudentManager throws into a JOptionPane message
- * instead of letting it reach the user as a stack trace - this is what the
- * rubric means by "GUI can give user-friendly messages when a false input
- * is given" and the "robust error handling" criterion generally.
+ * Handles button actions on the Students tab.
  *
  * @author Nishal Kinattukarayil Biju
  */

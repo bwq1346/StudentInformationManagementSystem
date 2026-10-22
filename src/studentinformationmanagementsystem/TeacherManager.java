@@ -1,14 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 import java.util.List;
 
 /**
- * Business logic for teachers - much simpler than StudentManager since
- * teachers don't need searching or sorting for this project, just the
- * standard CRUD plus id generation.
+ * Business logic for teachers, sitting between the UI and the repository.
  *
  * @author Nishal Kinattukarayil Biju
  */
@@ -51,7 +45,8 @@ public class TeacherManager {
     public Teacher findTeacher(String id) throws RecordNotFoundException {
         return teacherRepository.findById(id);
     }
-    
+
+    // keeps the teacher's course list in step with Course.teacherId
     public void assignCourseToTeacher(String teacherId, String courseCode) throws RecordNotFoundException {
         Teacher teacher = teacherRepository.findById(teacherId);
         teacher.assignCourse(courseCode);

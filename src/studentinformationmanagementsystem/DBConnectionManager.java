@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import java.sql.Connection;
@@ -12,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
+ * Singleton that owns the embedded Derby connection and creates the tables on first run.
  *
  * @author Vikram Bugata
  */
@@ -119,6 +116,7 @@ public final class DBConnectionManager
         }
         catch (SQLException e)
         {
+            // Derby always throws on a successful shutdown, so this is expected
         }
     }
 }

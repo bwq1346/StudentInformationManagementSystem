@@ -1,9 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-
 package studentinformationmanagementsystem;
 
 import java.awt.event.WindowAdapter;
@@ -13,7 +7,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 
 /**
- * @author Nishal & Vikram
+ * Main window and application entry point. Wires up the managers, views and controllers.
+ *
+ * @author Nishal Kinattukarayil Biju & Vikram Bugata
  */
 public class MainFrame extends JFrame {
 
@@ -48,6 +44,7 @@ public class MainFrame extends JFrame {
         new ReportsController(reportsView, reportManager);
         tabs.addTab("Reports", reportsView);
 
+        // refresh a tab when it's opened so it shows changes made on other tabs
         tabs.addChangeListener(e -> {
             if (tabs.getSelectedComponent() instanceof ModelListener) {
                 ((ModelListener) tabs.getSelectedComponent()).onDataChanged();
@@ -59,6 +56,7 @@ public class MainFrame extends JFrame {
         setSize(900, 600);
         setLocationRelativeTo(null);
 
+        // shut Derby down cleanly before exiting
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

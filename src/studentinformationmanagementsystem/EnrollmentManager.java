@@ -1,14 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package studentinformationmanagementsystem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Handles enrolling, waitlisting, withdrawing and grading students.
+ *
  * @author Vikram Bugata
  */
 public class EnrollmentManager {
@@ -38,6 +35,7 @@ public class EnrollmentManager {
                     + " is already on the waitlist for " + courseCode + ".");
         }
 
+        // false means the course was full and the student went on the waitlist
         boolean enrolledImmediately = course.enrolOrWaitlist(studentId);
         if (enrolledImmediately) {
             student.addCourseCode(courseCode);
@@ -78,6 +76,7 @@ public class EnrollmentManager {
             }
         }
 
+        // a freed seat goes to the next student on the waitlist
         if (promotedStudentId != null) {
             try {
                 Student promotedStudent = studentManager.findStudent(promotedStudentId);

@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package studentinformationmanagementsystem;
 
 import java.sql.Connection;
@@ -14,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Derby-backed CrudOperations for enrolments.
  *
  * @author Vikram Bugata
  */
@@ -171,7 +167,7 @@ public class EnrollmentDAO implements CrudOperations<Enrollment>
     private Enrollment mapRow(ResultSet rs) throws SQLException
     {
         double gradeValue = rs.getDouble("GRADE");
-
+        // getDouble returns 0 for NULL, so wasNull tells an ungraded row apart from a real 0
         Double grade = rs.wasNull() ? null : gradeValue;
         return new Enrollment(
                 rs.getString("ENROLLMENT_ID"),

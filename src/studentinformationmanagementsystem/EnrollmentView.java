@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package studentinformationmanagementsystem;
 
 import java.awt.BorderLayout;
@@ -18,6 +13,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Enrolments tab: a sortable table of all enrolments plus the action buttons.
  *
  * @author Vikram Bugata
  */
@@ -56,7 +52,7 @@ public class EnrollmentView extends JPanel implements ModelListener
         };
         enrollmentTable = new JTable(tableModel);
         enrollmentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        enrollmentTable.setAutoCreateRowSorter(true); // click a header to sort
+        enrollmentTable.setAutoCreateRowSorter(true);
 
         setLayout(new BorderLayout());
         add(new JScrollPane(enrollmentTable), BorderLayout.CENTER);
@@ -84,7 +80,7 @@ public class EnrollmentView extends JPanel implements ModelListener
         {
             return null;
         }
-        int modelRow = enrollmentTable.convertRowIndexToModel(viewRow);
+        int modelRow = enrollmentTable.convertRowIndexToModel(viewRow); // view order differs once sorted
         return String.valueOf(tableModel.getValueAt(modelRow, column));
     }
 
@@ -113,6 +109,7 @@ public class EnrollmentView extends JPanel implements ModelListener
         {
             String status = e.getStatus().name();
             Course course = courses.get(e.getCourseCode());
+            // waitlisted students are stored as ENROLLED, so show them as WAITLISTED here
             if(e.getStatus() == EnrollmentStatus.ENROLLED && course != null
                     && course.getWaitlist().contains(e.getStudentId()))
             {

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import java.awt.BorderLayout;
@@ -13,10 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 /**
- * Columns: Code, Name, Credits, Enrolled/Capacity, Waitlisted, Teacher.
- * Includes an "Assign Teacher" button alongside Add/Edit/Delete, since
- * CourseManager.assignTeacher(courseCode, teacherId) exists and needs a
- * GUI entry point.
+ * Courses tab: a table of all courses plus the action buttons.
  *
  * @author Nishal Kinattukarayil Biju
  */
