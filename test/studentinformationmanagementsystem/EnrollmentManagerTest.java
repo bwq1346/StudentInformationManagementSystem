@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import static org.junit.Assert.assertEquals;
@@ -14,10 +10,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * Unit tests for EnrollmentManager. Uses FakeRepository for students,
+ * courses and enrollments so no database is needed.
  *
  * @author Vikram Bugata
  */
-
 public class EnrollmentManagerTest {
 
     private StudentManager studentManager;
@@ -181,6 +178,35 @@ public class EnrollmentManagerTest {
         }
         assertEquals(3, enrollmentManager.getEnrollmentCount());
         assertEquals(3, enrollmentManager.listAll().size());
+    }
+
+    @Test
+    public void enrollStudent_courseFull_recordIsWaitlisted() throws Exception {
+        enrollmentManager.enrollStudent("STU0001", "COMP603", "S1-2026");
+        enrollmentManager.enrollStudent("STU0002", "COMP603", "S1-2026");
+
+        Enrollment record = enrollmentManager.getEnrollmentsForStudent("STU0002").get(0);
+        assertEquals(EnrollmentStatus.WAITLISTED, record.getStatus());
+    }
+
+    @Test
+    public void withdrawStudent_promotedStudentsRecordBecomesEnrolled() throws Exception {
+        enrollmentManager.enrollStudent("STU0001", "COMP603", "S1-2026");
+        enrollmentManager.enrollStudent("STU0002", "COMP603", "S1-2026");
+
+        enrollmentManager.withdrawStudent("STU0001", "COMP603");
+
+        Enrollment record = enrollmentManager.getEnrollmentsForStudent("STU0002").get(0);
+        assertEquals(EnrollmentStatus.ENROLLED, record.getStatus());
+    }
+
+    @Test(expected = InvalidInputException.class)
+    public void recordGrade_waitlistedStudent_throwsInvalidInputException() throws Exception {
+        enrollmentManager.enrollStudent("STU0001", "COMP603", "S1-2026");
+        enrollmentManager.enrollStudent("STU0002", "COMP603", "S1-2026");
+        String enrollmentId = enrollmentManager.getEnrollmentsForStudent("STU0002").get(0).getEnrollmentId();
+
+        enrollmentManager.recordGrade(enrollmentId, 80.0);
     }
 
     @Test

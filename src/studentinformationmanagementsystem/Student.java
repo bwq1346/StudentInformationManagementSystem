@@ -31,9 +31,9 @@ public class Student extends Person implements Comparable<Student> {
     public Student(String studentId, String name, String email, String phone,
             int yearLevel, String major, double gpa, StudentStatus status) {
         super(studentId, name, email, phone);
-        this.yearLevel = yearLevel;
+        setYearLevel(yearLevel);
         this.major = major;
-        this.gpa = gpa;
+        setGpa(gpa);
         this.status = status;
         this.enrolledCourseCodes = new HashSet<>();
     }
@@ -61,7 +61,7 @@ public class Student extends Person implements Comparable<Student> {
         return yearLevel;
     }
 
-    public void setYearLevel(int yearLevel) {
+    public final void setYearLevel(int yearLevel) {
         if (yearLevel < 1 || yearLevel > 8) {
             throw new IllegalArgumentException("Year Level must be between 1 and 8.");
         }
@@ -80,7 +80,7 @@ public class Student extends Person implements Comparable<Student> {
         return gpa;
     }
 
-    public void setGpa(double gpa) {
+    public final void setGpa(double gpa) {
         if (gpa < 0.0 || gpa > 4.0) {
             throw new IllegalArgumentException("GPA must be between 0.0 and 4.0");
         }

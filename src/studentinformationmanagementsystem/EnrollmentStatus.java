@@ -13,6 +13,7 @@ package studentinformationmanagementsystem;
  */
 public enum EnrollmentStatus {
     ENROLLED,
+    WAITLISTED,
     COMPLETED,
     WITHDRAWN
 }
