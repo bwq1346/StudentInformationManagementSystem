@@ -26,8 +26,6 @@ public class EnrollmentView extends JPanel implements ModelListener
     static final int COL_COURSE = 3;
     static final int COL_STATUS = 7;
 
-    static final String WAITLISTED = "WAITLISTED";
-
     private final JTable enrollmentTable;
     private final DefaultTableModel tableModel;
 
@@ -109,11 +107,11 @@ public class EnrollmentView extends JPanel implements ModelListener
         {
             String status = e.getStatus().name();
             Course course = courses.get(e.getCourseCode());
-            // waitlisted students are stored as ENROLLED, so show them as WAITLISTED here
+            // older records saved waitlisted students as ENROLLED
             if(e.getStatus() == EnrollmentStatus.ENROLLED && course != null
                     && course.getWaitlist().contains(e.getStudentId()))
             {
-                status = WAITLISTED;
+                status = EnrollmentStatus.WAITLISTED.name();
             }
             tableModel.addRow(new Object[]{
                 e.getEnrollmentId(),
