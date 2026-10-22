@@ -61,6 +61,11 @@ public class CourseManager
     {
         return courseRepository.findById(courseCode);
     }
+   
+    public void saveCourse(Course course) throws RecordNotFoundException
+    {
+        courseRepository.update(course);
+    }
 
     public boolean exists(String courseCode)
     {
