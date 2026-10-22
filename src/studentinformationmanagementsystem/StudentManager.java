@@ -73,6 +73,10 @@ public class StudentManager {
     public Student findStudent(String id) throws RecordNotFoundException {
         return studentRepository.findById(id);
     }
+ 
+    public void saveStudent(Student student) throws RecordNotFoundException {
+        studentRepository.update(student);
+    }
 
     public boolean exists(String id) {
         return studentRepository.existsById(id);
