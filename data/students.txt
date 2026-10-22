@@ -1,1 +1,0 @@
-STU0001,Vikram Bugata,vikram@gmail.com,1234567890,2,COMSCI,3.0,ACTIVE,

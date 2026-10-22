@@ -30,14 +30,20 @@ public class CourseController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == courseView.addButton) {
-            handleAdd();
-        } else if (e.getSource() == courseView.editButton) {
-            handleEdit();
-        } else if (e.getSource() == courseView.deleteButton) {
-            handleDelete();
-        } else if (e.getSource() == courseView.assignTeacherButton) {
-            handleAssignTeacher();
+        try {
+            if (e.getSource() == courseView.addButton) {
+                handleAdd();
+            } else if (e.getSource() == courseView.editButton) {
+                handleEdit();
+            } else if (e.getSource() == courseView.deleteButton) {
+                handleDelete();
+            } else if (e.getSource() == courseView.assignTeacherButton) {
+                handleAssignTeacher();
+            }
+        } catch (RuntimeException ex) {
+            // DAOs wrap SQLExceptions in RuntimeException
+            JOptionPane.showMessageDialog(courseView, ex.getMessage(),
+                    "Database error", JOptionPane.WARNING_MESSAGE);
         }
     }
 

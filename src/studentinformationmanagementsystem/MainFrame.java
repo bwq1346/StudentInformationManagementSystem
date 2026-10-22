@@ -3,6 +3,7 @@ package studentinformationmanagementsystem;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
 
@@ -47,7 +48,12 @@ public class MainFrame extends JFrame {
         // refresh a tab when it's opened so it shows changes made on other tabs
         tabs.addChangeListener(e -> {
             if (tabs.getSelectedComponent() instanceof ModelListener) {
-                ((ModelListener) tabs.getSelectedComponent()).onDataChanged();
+                try {
+                    ((ModelListener) tabs.getSelectedComponent()).onDataChanged();
+                } catch (RuntimeException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage(),
+                            "Database error", JOptionPane.WARNING_MESSAGE);
+                }
             }
         });
 
@@ -67,6 +73,16 @@ public class MainFrame extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new MainFrame().setVisible(true));
+        SwingUtilities.invokeLater(() -> {
+            try {
+                new MainFrame().setVisible(true);
+            } catch (RuntimeException ex) {
+                JOptionPane.showMessageDialog(null,
+                        "Could not start the application:\n" + ex.getMessage()
+                        + "\n\nIf the app is already open, close it and try again.",
+                        "Database error", JOptionPane.ERROR_MESSAGE);
+                System.exit(1);
+            }
+        });
     }
 }
