@@ -51,6 +51,18 @@ public class TeacherManager {
     public Teacher findTeacher(String id) throws RecordNotFoundException {
         return teacherRepository.findById(id);
     }
+    
+    public void assignCourseToTeacher(String teacherId, String courseCode) throws RecordNotFoundException {
+        Teacher teacher = teacherRepository.findById(teacherId);
+        teacher.assignCourse(courseCode);
+        teacherRepository.update(teacher);
+    }
+
+    public void unassignCourseFromTeacher(String teacherId, String courseCode) throws RecordNotFoundException {
+        Teacher teacher = teacherRepository.findById(teacherId);
+        teacher.unassignCourse(courseCode);
+        teacherRepository.update(teacher);
+    }
 
     public boolean exists(String id) {
         return teacherRepository.existsById(id);

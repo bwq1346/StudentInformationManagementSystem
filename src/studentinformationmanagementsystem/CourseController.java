@@ -74,6 +74,16 @@ public class CourseController implements ActionListener {
 
         try {
             courseManager.addCourse(courseCode, courseName, creditPoints, capacity, teacherId);
+            if (teacherId != null) {
+                try {
+                    teacherManager.assignCourseToTeacher(teacherId, courseCode);
+                } catch (RecordNotFoundException ex) {
+                    JOptionPane.showMessageDialog(courseView,
+                            "Course was added, but teacher " + teacherId
+                                    + " could not be found to update their course list.",
+                            "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            }
             courseView.onDataChanged();
         } catch (InvalidInputException ex) {
             JOptionPane.showMessageDialog(courseView, ex.getMessage(),
@@ -149,6 +159,15 @@ public class CourseController implements ActionListener {
             JOptionPane.showMessageDialog(courseView, "Select a course first.");
             return;
         }
+        
+        String oldTeacherId;
+        try {
+            oldTeacherId = courseManager.findCourse(code).getTeacherId();
+        } catch (RecordNotFoundException ex) {
+            JOptionPane.showMessageDialog(courseView, ex.getMessage(),
+                    "Could not load course", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
         List<Teacher> teachers = teacherManager.listAll();
         if (teachers.isEmpty()) {
@@ -172,6 +191,10 @@ public class CourseController implements ActionListener {
 
         try {
             courseManager.assignTeacher(code, teacherId);
+            if (oldTeacherId != null && !oldTeacherId.equals(teacherId)) {
+                teacherManager.unassignCourseFromTeacher(oldTeacherId, code);
+            }
+            teacherManager.assignCourseToTeacher(teacherId, code);
             courseView.onDataChanged();
         } catch (RecordNotFoundException ex) {
             JOptionPane.showMessageDialog(courseView, ex.getMessage(),
