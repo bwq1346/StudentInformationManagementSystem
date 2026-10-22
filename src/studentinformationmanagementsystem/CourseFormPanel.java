@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 /**
+ * Form for entering or editing course details.
  *
  * @author Nishal Kinattukarayil Biju
  */
@@ -45,7 +42,7 @@ public class CourseFormPanel extends EntityFormPanel {
     public void populateFields(Object entity) {
         Course c = (Course) entity;
         courseCodeField.setText(c.getCourseCode());
-        courseCodeField.setEnabled(false); // course code can't be changed once created
+        courseCodeField.setEnabled(false); // course code is the primary key, so it can't be edited
         courseNameField.setText(c.getCourseName());
         creditPointsField.setText(String.valueOf(c.getCreditPoints()));
         capacityField.setText(String.valueOf(c.getCapacity()));

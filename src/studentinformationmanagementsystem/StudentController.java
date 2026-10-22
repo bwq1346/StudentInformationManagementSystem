@@ -1,18 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JOptionPane;
 /**
- * Translates StudentView button clicks into StudentManager calls, and
- * turns any exception StudentManager throws into a JOptionPane message
- * instead of letting it reach the user as a stack trace - this is what the
- * rubric means by "GUI can give user-friendly messages when a false input
- * is given" and the "robust error handling" criterion generally.
+ * Handles button actions on the Students tab.
  *
  * @author Nishal Kinattukarayil Biju
  */
@@ -34,14 +26,20 @@ public class StudentController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == studentView.addButton) {
-            handleAdd();
-        } else if (e.getSource() == studentView.editButton) {
-            handleEdit();
-        } else if (e.getSource() == studentView.deleteButton) {
-            handleDelete();
-        } else if (e.getSource() == studentView.searchButton) {
-            handleSearch();
+        try {
+            if (e.getSource() == studentView.addButton) {
+                handleAdd();
+            } else if (e.getSource() == studentView.editButton) {
+                handleEdit();
+            } else if (e.getSource() == studentView.deleteButton) {
+                handleDelete();
+            } else if (e.getSource() == studentView.searchButton) {
+                handleSearch();
+            }
+        } catch (RuntimeException ex) {
+            // DAOs wrap SQLExceptions in RuntimeException
+            JOptionPane.showMessageDialog(studentView, ex.getMessage(),
+                    "Database error", JOptionPane.WARNING_MESSAGE);
         }
     }
 

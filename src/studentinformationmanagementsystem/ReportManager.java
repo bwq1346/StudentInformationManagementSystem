@@ -1,9 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-
 package studentinformationmanagementsystem;
 
 import java.io.FileWriter;
@@ -14,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
+ * Builds the text reports and exports the full report to a file.
+ *
  * @author Vikram Bugata
  */
 public class ReportManager {
@@ -27,12 +23,6 @@ public class ReportManager {
         this.studentManager = studentManager;
         this.courseManager = courseManager;
         this.enrollmentManager = enrollmentManager;
-    }
-
-    public void printReportLines(List<? extends Reportable> items) {
-        for (Reportable item : items) {
-            System.out.println("  " + item.toReportLine());
-        }
     }
 
     public List<Student> topStudentsByGpa(int topN) {

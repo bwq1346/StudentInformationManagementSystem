@@ -1,14 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package studentinformationmanagementsystem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Handles enrolling, waitlisting, withdrawing and grading students.
+ *
  * @author Vikram Bugata
  */
 public class EnrollmentManager {
@@ -38,6 +35,7 @@ public class EnrollmentManager {
                     + " is already on the waitlist for " + courseCode + ".");
         }
 
+        // false means the course was full and the student went on the waitlist
         boolean enrolledImmediately = course.enrolOrWaitlist(studentId);
         if (enrolledImmediately) {
             student.addCourseCode(courseCode);
@@ -49,7 +47,8 @@ public class EnrollmentManager {
         try {
             String enrollmentId = IdGenerator.next("ENR", 5, enrollmentRepository.findAll(),
                     Enrollment::getEnrollmentId);
-            EnrollmentStatus status = EnrollmentStatus.ENROLLED;
+            EnrollmentStatus status = enrolledImmediately
+                    ? EnrollmentStatus.ENROLLED : EnrollmentStatus.WAITLISTED;
             Enrollment enrollment = new Enrollment(enrollmentId, studentId, courseCode, semester, null, status);
             enrollmentRepository.add(enrollment);
             ActivityLogger.log((enrolledImmediately ? "Enrolled" : "Waitlisted") +
@@ -78,11 +77,21 @@ public class EnrollmentManager {
             }
         }
 
+        // a freed seat goes to the next student on the waitlist
         if (promotedStudentId != null) {
             try {
                 Student promotedStudent = studentManager.findStudent(promotedStudentId);
                 promotedStudent.addCourseCode(courseCode);
                 studentManager.saveStudent(promotedStudent);
+
+                for (Enrollment enrollment : enrollmentRepository.findAll()) {
+                    if (enrollment.getStudentId().equals(promotedStudentId)
+                            && enrollment.getCourseCode().equals(courseCode)
+                            && enrollment.getStatus() == EnrollmentStatus.WAITLISTED) {
+                        enrollment.setStatus(EnrollmentStatus.ENROLLED);
+                        enrollmentRepository.update(enrollment);
+                    }
+                }
                 ActivityLogger.log("Promoted waitlisted student " + promotedStudentId + " into course " + courseCode);
             } catch (RecordNotFoundException ignored) {
             }
@@ -93,6 +102,12 @@ public class EnrollmentManager {
     public void recordGrade(String enrollmentId, double grade) throws RecordNotFoundException, InvalidInputException {
         try {
             Enrollment enrollment = enrollmentRepository.findById(enrollmentId);
+            if (enrollment.getStatus() == EnrollmentStatus.WAITLISTED) {
+                throw new InvalidInputException("Can't record a grade for a student who is still on the waitlist.");
+            }
+            if (enrollment.getStatus() == EnrollmentStatus.WITHDRAWN) {
+                throw new InvalidInputException("Can't record a grade for a withdrawn enrolment.");
+            }
             enrollment.setGrade(grade);
             enrollment.setStatus(EnrollmentStatus.COMPLETED);
             enrollmentRepository.update(enrollment);
@@ -130,4 +145,3 @@ public class EnrollmentManager {
         return enrollmentRepository.count();
     }
 }
-

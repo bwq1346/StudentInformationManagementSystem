@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +6,9 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
+ * Handles button actions on the Courses tab.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public class CourseController implements ActionListener {
 
@@ -33,14 +30,20 @@ public class CourseController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == courseView.addButton) {
-            handleAdd();
-        } else if (e.getSource() == courseView.editButton) {
-            handleEdit();
-        } else if (e.getSource() == courseView.deleteButton) {
-            handleDelete();
-        } else if (e.getSource() == courseView.assignTeacherButton) {
-            handleAssignTeacher();
+        try {
+            if (e.getSource() == courseView.addButton) {
+                handleAdd();
+            } else if (e.getSource() == courseView.editButton) {
+                handleEdit();
+            } else if (e.getSource() == courseView.deleteButton) {
+                handleDelete();
+            } else if (e.getSource() == courseView.assignTeacherButton) {
+                handleAssignTeacher();
+            }
+        } catch (RuntimeException ex) {
+            // DAOs wrap SQLExceptions in RuntimeException
+            JOptionPane.showMessageDialog(courseView, ex.getMessage(),
+                    "Database error", JOptionPane.WARNING_MESSAGE);
         }
     }
 
@@ -56,6 +59,7 @@ public class CourseController implements ActionListener {
         String courseCode = (String) values[0];
         String courseName = (String) values[1];
         String teacherId = (String) values[4];
+        // teacher is optional - treat a blank field as no teacher
         if (teacherId != null && teacherId.trim().isEmpty()) {
             teacherId = null;
         }
@@ -108,7 +112,7 @@ public class CourseController implements ActionListener {
         }
 
         CourseFormPanel form = (CourseFormPanel) FormFactory.createForm(FormFactory.EntityType.COURSE);
-        form.populateFields(existing); // also disables the course code field
+        form.populateFields(existing);
         int result = JOptionPane.showConfirmDialog(courseView, form, "Edit Course",
                 JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
         if (result != JOptionPane.OK_OPTION) {
@@ -189,6 +193,7 @@ public class CourseController implements ActionListener {
         String selected = (String) teacherIdBox.getSelectedItem();
         String teacherId = selected.split(" - ")[0];
 
+        // keep the course's teacher and each teacher's course list in sync
         try {
             courseManager.assignTeacher(code, teacherId);
             if (oldTeacherId != null && !oldTeacherId.equals(teacherId)) {

@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import static org.junit.Assert.assertEquals;
@@ -10,8 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * Unit tests for StudentManager.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public class StudentManagerTest {
 
@@ -39,8 +36,6 @@ public class StudentManagerTest {
 
     @Test(expected = InvalidInputException.class)
     public void addStudent_gpaAboveMaximum_throwsInvalidInputException() throws Exception {
-        // GPA must be between 0.0 and 4.0 (Student.setGpa) - 4.5 should be
-        // rejected before the "student" ever reaches the repository
         studentManager.addStudent(
                 "Bad GPA Student", "bad@example.com", "0211111111",
                 1, "Computer Science", 4.5, StudentStatus.ACTIVE);

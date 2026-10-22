@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -13,9 +9,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Read-only JTable of all teachers plus Add/Edit/Delete buttons.
- * TeacherManager has no searchByX methods, so there's no search button
- * needed here, unlike StudentView.
+ * Teachers tab: a table of all teachers plus the action buttons.
  *
  * @author Nishal Kinattukarayil Biju
  */

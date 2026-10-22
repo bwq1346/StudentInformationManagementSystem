@@ -1,13 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Unit tests for CourseManager.
+ *
+ * @author Nishal Kinattukarayil Biju
+ */
 public class CourseManagerTest {
 
     private CourseManager courseManager;
@@ -19,9 +20,7 @@ public class CourseManagerTest {
 
     @Test(expected = InvalidInputException.class)
     public void addCourse_duplicateCourseCode_throwsInvalidInputException() throws Exception {
-        // course codes are typed by the user (not auto-generated like
-        // Student/Teacher ids), so a duplicate code is a real scenario a
-        // user could trigger from the GUI
+        // course codes are typed in by the user, so duplicates are possible
         courseManager.addCourse("COMP603", "Software Dev Project 2", 15, 50, null);
         courseManager.addCourse("COMP603", "Different Name, Same Code", 15, 50, null);
     }

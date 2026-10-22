@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import java.awt.event.ActionEvent;
@@ -12,6 +8,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
+ * Handles button actions on the Reports tab.
  *
  * @author Vikram Bugata
  */
@@ -114,7 +111,7 @@ public class ReportsController implements ActionListener
 
     private void handleTranscript()
     {
-        List<Student> students = reportManager.topStudentsByGpa(Integer.MAX_VALUE);
+        List<Student> students = reportManager.topStudentsByGpa(Integer.MAX_VALUE); // all students
         if(students.isEmpty())
         {
             JOptionPane.showMessageDialog(reportsView, "There are no students yet.");

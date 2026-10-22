@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import java.sql.Connection;
@@ -15,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Derby-backed CrudOperations for courses.
  *
  * @author Vikram Bugata
  */
@@ -78,6 +75,7 @@ public class CourseDAO implements CrudOperations<Course>
 
     @Override
     public void delete(String courseCode) throws RecordNotFoundException {
+        // removes the course's enrolments and student/teacher references in one transaction
         try {
             connection.setAutoCommit(false);
             try {
@@ -101,7 +99,7 @@ public class CourseDAO implements CrudOperations<Course>
                 connection.rollback();
                 throw e;
             } finally {
-                connection.setAutoCommit(true); // back to DBConnectionManager's write-through default
+                connection.setAutoCommit(true);
             }
         } catch (SQLException e) {
             throw new RuntimeException("Could not delete course " + courseCode + ": " + e.getMessage(), e);
@@ -169,7 +167,7 @@ public class CourseDAO implements CrudOperations<Course>
                 rs.getString("COURSE_NAME"),
                 rs.getInt("CREDIT_POINTS"),
                 rs.getInt("CAPACITY"),
-                rs.getString("TEACHER_ID")); // null when no teacher is assigned
+                rs.getString("TEACHER_ID"));
         for (String id : splitList(rs.getString("ENROLLED_STUDENT_IDS"))) {
             course.getEnrolledStudentIds().add(id);
         }
@@ -199,6 +197,7 @@ public class CourseDAO implements CrudOperations<Course>
         }
     }
 
+    // LIKE narrows the rows; the exact match is checked in Java
     private void removeFromListColumn(String table, String idColumn, String listColumn, String value)
             throws SQLException {
         Map<String, String> changed = new LinkedHashMap<>();

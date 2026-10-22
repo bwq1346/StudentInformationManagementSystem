@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import static org.junit.Assert.assertEquals;
@@ -10,8 +6,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * Unit tests for TeacherManager.
  *
- * @author Nishal
+ * @author Nishal Kinattukarayil Biju
  */
 public class TeacherManagerTest {
 

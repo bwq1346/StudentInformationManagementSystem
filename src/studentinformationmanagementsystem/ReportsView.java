@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import java.awt.BorderLayout;
@@ -15,6 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 /**
+ * Reports tab: report buttons on the left, output text area on the right.
  *
  * @author Vikram Bugata
  */
@@ -62,6 +59,6 @@ public class ReportsView extends JPanel
     public void showReport(String title, String text) {
         titleLabel.setText(title);
         outputArea.setText(text);
-        outputArea.setCaretPosition(0); // scroll back to the top
+        outputArea.setCaretPosition(0);
     }
 }

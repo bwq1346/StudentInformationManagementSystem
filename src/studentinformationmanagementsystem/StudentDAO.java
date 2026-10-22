@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import java.sql.Connection;
@@ -9,13 +5,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
+ * Derby-backed CrudOperations for students.
  *
  * @author Vikram Bugata
  */
-
 public class StudentDAO implements CrudOperations<Student>
 {
 
@@ -46,7 +44,7 @@ public class StudentDAO implements CrudOperations<Student>
             statement.setDouble(7, item.getGpa());
             statement.setString(8, item.getStatus().name());
             statement.setString(9, String.join(",", item.getEnrolledCourseCodes()));
-            statement.executeUpdate(); // auto-commit is on, so this is durable on disk immediately
+            statement.executeUpdate();
         } 
         catch(SQLException e)
         {
@@ -85,17 +83,49 @@ public class StudentDAO implements CrudOperations<Student>
     @Override
     public void delete(String id) throws RecordNotFoundException
     {
-        String sql = "DELETE FROM STUDENT WHERE ID=?";
-        try(PreparedStatement statement = connection.prepareStatement(sql))
+        // removes the student's enrolments and course references in one transaction
+        try
         {
-            statement.setString(1, id);
-            int rowsAffected = statement.executeUpdate();
-            if(rowsAffected == 0)
+            connection.setAutoCommit(false);
+            try
             {
-                throw new RecordNotFoundException("No student found with ID " + id);
+                try(PreparedStatement statement = connection.prepareStatement(
+                        "DELETE FROM ENROLLMENT WHERE STUDENT_ID=?"))
+                {
+                    statement.setString(1, id);
+                    statement.executeUpdate();
+                }
+
+                removeFromListColumn("COURSE", "COURSE_CODE", "ENROLLED_STUDENT_IDS", id);
+                removeFromListColumn("COURSE", "COURSE_CODE", "WAITLIST", id);
+
+                try(PreparedStatement statement = connection.prepareStatement(
+                        "DELETE FROM STUDENT WHERE ID=?"))
+                {
+                    statement.setString(1, id);
+                    if(statement.executeUpdate() == 0)
+                    {
+                        throw new RecordNotFoundException("No student found with ID " + id);
+                    }
+                }
+
+                connection.commit();
+            }
+            catch(SQLException | RecordNotFoundException e)
+            {
+                connection.rollback();
+                throw e;
+            }
+            finally
+            {
+                connection.setAutoCommit(true);
             }
         }
-        catch (SQLException e)
+        catch(RecordNotFoundException e)
+        {
+            throw e;
+        }
+        catch(SQLException e)
         {
             throw new RuntimeException("Could not delete student " + id + ": " + e.getMessage(), e);
         }
@@ -196,5 +226,51 @@ public class StudentDAO implements CrudOperations<Student>
             }
         }
         return student;
+    }
+
+    // LIKE narrows the rows; the exact match is checked in Java so "STU1" doesn't hit "STU10"
+    private void removeFromListColumn(String table, String idColumn, String listColumn, String value)
+            throws SQLException
+    {
+        Map<String, String> changed = new LinkedHashMap<>();
+        String select = "SELECT " + idColumn + ", " + listColumn + " FROM " + table
+                + " WHERE " + listColumn + " LIKE ?";
+        try(PreparedStatement statement = connection.prepareStatement(select))
+        {
+            statement.setString(1, "%" + value + "%");
+            try(ResultSet rs = statement.executeQuery())
+            {
+                while(rs.next())
+                {
+                    String joined = rs.getString(2);
+                    List<String> values = new ArrayList<>();
+                    if(joined != null && !joined.isEmpty())
+                    {
+                        for(String entry : joined.split(","))
+                        {
+                            if(!entry.trim().isEmpty())
+                            {
+                                values.add(entry.trim());
+                            }
+                        }
+                    }
+                    if(values.remove(value))
+                    {
+                        changed.put(rs.getString(1), String.join(",", values));
+                    }
+                }
+            }
+        }
+
+        String update = "UPDATE " + table + " SET " + listColumn + "=? WHERE " + idColumn + "=?";
+        try(PreparedStatement statement = connection.prepareStatement(update))
+        {
+            for(Map.Entry<String, String> entry : changed.entrySet())
+            {
+                statement.setString(1, entry.getValue());
+                statement.setString(2, entry.getKey());
+                statement.executeUpdate();
+            }
+        }
     }
 }

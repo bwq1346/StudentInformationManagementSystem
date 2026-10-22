@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -13,11 +9,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
- * Swing screen for Student CRUD + search. Pure View - it only knows how to
- * display students and raise button-click events; it never talks to
- * StudentManager directly, that's StudentController's job (this split is
- * what the brief means by "clear separation of concerns between GUI,
- * business logic, and data access").
+ * Students tab: a table of all students plus the action buttons.
  *
  * @author Nishal Kinattukarayil Biju
  */
@@ -31,8 +23,6 @@ public class StudentView extends JPanel implements ModelListener {
     public final JButton deleteButton = new JButton("Delete Student");
     public final JButton searchButton = new JButton("Search");
 
-    // StudentController sets this after construction, so onDataChanged()
-    // knows where to pull the latest list from
     private StudentManager studentManager;
 
     public StudentView() {
@@ -40,7 +30,7 @@ public class StudentView extends JPanel implements ModelListener {
                 new Object[]{"ID", "Name", "Year", "Major", "GPA", "Status"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false; // read-only table - editing happens through the Add/Edit dialog
+                return false;
             }
         };
         studentTable = new JTable(tableModel);
@@ -58,15 +48,13 @@ public class StudentView extends JPanel implements ModelListener {
 
     public void setStudentManager(StudentManager studentManager) {
         this.studentManager = studentManager;
-        onDataChanged(); // populate the table immediately on startup
+        onDataChanged();
     }
 
     public JTable getStudentTable() {
         return studentTable;
     }
 
-    // Returns the ID of whichever row is currently selected, or null if
-    // nothing's selected - StudentController uses this for Edit/Delete.
     public String getSelectedStudentId() {
         int row = studentTable.getSelectedRow();
         if (row < 0) {

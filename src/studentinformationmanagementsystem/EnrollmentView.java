@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package studentinformationmanagementsystem;
 
 import java.awt.BorderLayout;
@@ -18,6 +13,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
+ * Enrolments tab: a sortable table of all enrolments plus the action buttons.
  *
  * @author Vikram Bugata
  */
@@ -29,8 +25,6 @@ public class EnrollmentView extends JPanel implements ModelListener
     static final int COL_STUDENT_ID = 1;
     static final int COL_COURSE = 3;
     static final int COL_STATUS = 7;
-
-    static final String WAITLISTED = "WAITLISTED";
 
     private final JTable enrollmentTable;
     private final DefaultTableModel tableModel;
@@ -56,7 +50,7 @@ public class EnrollmentView extends JPanel implements ModelListener
         };
         enrollmentTable = new JTable(tableModel);
         enrollmentTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        enrollmentTable.setAutoCreateRowSorter(true); // click a header to sort
+        enrollmentTable.setAutoCreateRowSorter(true);
 
         setLayout(new BorderLayout());
         add(new JScrollPane(enrollmentTable), BorderLayout.CENTER);
@@ -84,7 +78,7 @@ public class EnrollmentView extends JPanel implements ModelListener
         {
             return null;
         }
-        int modelRow = enrollmentTable.convertRowIndexToModel(viewRow);
+        int modelRow = enrollmentTable.convertRowIndexToModel(viewRow); // view order differs once sorted
         return String.valueOf(tableModel.getValueAt(modelRow, column));
     }
 
@@ -113,10 +107,11 @@ public class EnrollmentView extends JPanel implements ModelListener
         {
             String status = e.getStatus().name();
             Course course = courses.get(e.getCourseCode());
+            // older records saved waitlisted students as ENROLLED
             if(e.getStatus() == EnrollmentStatus.ENROLLED && course != null
                     && course.getWaitlist().contains(e.getStudentId()))
             {
-                status = WAITLISTED;
+                status = EnrollmentStatus.WAITLISTED.name();
             }
             tableModel.addRow(new Object[]{
                 e.getEnrollmentId(),

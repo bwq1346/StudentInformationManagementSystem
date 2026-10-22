@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package studentinformationmanagementsystem;
 
 import java.awt.event.ActionEvent;
@@ -9,8 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
- * Same shape as StudentController - wires TeacherView's three buttons to
- * TeacherManager's add/update/delete methods.
+ * Handles button actions on the Teachers tab.
  *
  * @author Nishal Kinattukarayil Biju
  */
@@ -31,12 +26,18 @@ public class TeacherController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == teacherView.addButton) {
-            handleAdd();
-        } else if (e.getSource() == teacherView.editButton) {
-            handleEdit();
-        } else if (e.getSource() == teacherView.deleteButton) {
-            handleDelete();
+        try {
+            if (e.getSource() == teacherView.addButton) {
+                handleAdd();
+            } else if (e.getSource() == teacherView.editButton) {
+                handleEdit();
+            } else if (e.getSource() == teacherView.deleteButton) {
+                handleDelete();
+            }
+        } catch (RuntimeException ex) {
+            // DAOs wrap SQLExceptions in RuntimeException
+            JOptionPane.showMessageDialog(teacherView, ex.getMessage(),
+                    "Database error", JOptionPane.WARNING_MESSAGE);
         }
     }
 
