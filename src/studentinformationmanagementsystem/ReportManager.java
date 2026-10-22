@@ -25,12 +25,6 @@ public class ReportManager {
         this.enrollmentManager = enrollmentManager;
     }
 
-    public void printReportLines(List<? extends Reportable> items) {
-        for (Reportable item : items) {
-            System.out.println("  " + item.toReportLine());
-        }
-    }
-
     public List<Student> topStudentsByGpa(int topN) {
         List<Student> sorted = studentManager.listAllSorted();
         return sorted.subList(0, Math.min(topN, sorted.size()));
