@@ -5,7 +5,7 @@
 package studentinformationmanagementsystem;
 
 /**
- * The possible states a single enrolment can be in - still going
+ * The possible states a single enrollment can be in - still going
  * (ENROLLED), finished with a grade (COMPLETED), or pulled out of the
  * course (WITHDRAWN).
  *

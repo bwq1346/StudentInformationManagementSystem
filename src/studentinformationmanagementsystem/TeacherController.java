@@ -26,12 +26,18 @@ public class TeacherController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == teacherView.addButton) {
-            handleAdd();
-        } else if (e.getSource() == teacherView.editButton) {
-            handleEdit();
-        } else if (e.getSource() == teacherView.deleteButton) {
-            handleDelete();
+        try {
+            if (e.getSource() == teacherView.addButton) {
+                handleAdd();
+            } else if (e.getSource() == teacherView.editButton) {
+                handleEdit();
+            } else if (e.getSource() == teacherView.deleteButton) {
+                handleDelete();
+            }
+        } catch (RuntimeException ex) {
+            // DAOs wrap SQLExceptions in RuntimeException
+            JOptionPane.showMessageDialog(teacherView, ex.getMessage(),
+                    "Database error", JOptionPane.WARNING_MESSAGE);
         }
     }
 

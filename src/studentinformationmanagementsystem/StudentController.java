@@ -26,14 +26,20 @@ public class StudentController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == studentView.addButton) {
-            handleAdd();
-        } else if (e.getSource() == studentView.editButton) {
-            handleEdit();
-        } else if (e.getSource() == studentView.deleteButton) {
-            handleDelete();
-        } else if (e.getSource() == studentView.searchButton) {
-            handleSearch();
+        try {
+            if (e.getSource() == studentView.addButton) {
+                handleAdd();
+            } else if (e.getSource() == studentView.editButton) {
+                handleEdit();
+            } else if (e.getSource() == studentView.deleteButton) {
+                handleDelete();
+            } else if (e.getSource() == studentView.searchButton) {
+                handleSearch();
+            }
+        } catch (RuntimeException ex) {
+            // DAOs wrap SQLExceptions in RuntimeException
+            JOptionPane.showMessageDialog(studentView, ex.getMessage(),
+                    "Database error", JOptionPane.WARNING_MESSAGE);
         }
     }
 
