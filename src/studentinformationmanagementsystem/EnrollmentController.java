@@ -193,7 +193,7 @@ public class EnrollmentController implements ActionListener
             showWarning("You can't record a grade for a withdrawn enrolment.", "Cannot record grade");
             return;
         }
-        if (EnrollmentView.WAITLISTED.equals(status)) {
+        if (EnrollmentStatus.WAITLISTED.name().equals(status)) {
             showWarning("This student is still on the waitlist, so there's no grade to record yet.",
                     "Cannot record grade");
             return;
