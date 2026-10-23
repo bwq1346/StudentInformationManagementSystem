@@ -10,6 +10,10 @@ import java.sql.Statement;
 /**
  * Singleton that owns the embedded Derby connection and creates the tables on first run.
  *
+ * Singleton structure and CREATE TABLE statements drafted with assistance from
+ * Claude AI; modified by Vikram to use a DatabaseMetaData table check, match our
+ * column names and share one connection — see AI Interaction Log.
+ *
  * @author Vikram Bugata
  */
 
@@ -92,6 +96,7 @@ public final class DBConnectionManager
                 + "STATUS VARCHAR(20) NOT NULL)");
     }
 
+    // DatabaseMetaData table check written by Vikram, replacing the AI's original approach.
     private void createTableIfMissing(String tableName, String createSql) throws SQLException
     {
         DatabaseMetaData meta = connection.getMetaData();

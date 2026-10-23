@@ -13,6 +13,10 @@ import org.junit.Test;
  * Unit tests for EnrollmentManager. Uses FakeRepository for students,
  * courses and enrollments so no database is needed.
  *
+ * Initial enrol / enrol-twice / full-course-waitlist tests drafted with assistance
+ * from Claude AI; modified by Nishal to use FakeRepository instead of Mockito,
+ * rename the tests and fix the imports — see AI Interaction Log.
+ *
  * @author Vikram Bugata
  */
 public class EnrollmentManagerTest {
@@ -107,6 +111,7 @@ public class EnrollmentManagerTest {
         assertEquals(EnrollmentStatus.WITHDRAWN, record.getStatus());
     }
 
+    // Written by Nishal (not AI-generated) — see AI Interaction Log.
     @Test
     public void withdrawStudent_fromFullCourse_promotesNextWaitlistedStudent() throws Exception {
         enrollmentManager.enrollStudent("STU0001", "COMP603", "S1-2026");
