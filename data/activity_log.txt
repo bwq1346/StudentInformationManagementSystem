@@ -269,3 +269,139 @@
 [2026-10-23 00:51:21] Added student STU0001 (Nishal Biju)
 [2026-10-23 00:51:22] Added teacher TCH001 (Dr. Vikram Bugata)
 [2026-10-23 00:51:22] Deleted teacher TCH001
+[2026-10-23 00:53:36] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:36] Assigned teacher TCH001 to course COMP603
+[2026-10-23 00:53:36] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP610
+[2026-10-23 00:53:38] Enrolled student STU0002 in course COMP610
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP603
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP610
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP603
+[2026-10-23 00:53:38] Waitlisted student STU0002 in course COMP603
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP610
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP610
+[2026-10-23 00:53:38] Recorded grade 87.5 for enrollment ENR00001
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP610
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP603
+[2026-10-23 00:53:38] Waitlisted student STU0002 in course COMP603
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP603
+[2026-10-23 00:53:38] Waitlisted student STU0002 in course COMP603
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP610
+[2026-10-23 00:53:38] Withdrew student STU0001 from course COMP610
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP603
+[2026-10-23 00:53:38] Waitlisted student STU0002 in course COMP603
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP610
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP610
+[2026-10-23 00:53:38] Enrolled student STU0002 in course COMP610
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP603
+[2026-10-23 00:53:38] Waitlisted student STU0002 in course COMP603
+[2026-10-23 00:53:38] Promoted waitlisted student STU0002 into course COMP603
+[2026-10-23 00:53:38] Withdrew student STU0001 from course COMP603
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:38] Added student STU0002 (Vikram Bugata)
+[2026-10-23 00:53:38] Added student STU0003 (Third Student)
+[2026-10-23 00:53:38] Added course COMP603 (Software Dev Project 2)
+[2026-10-23 00:53:38] Added course COMP610 (Database Systems)
+[2026-10-23 00:53:38] Enrolled student STU0001 in course COMP603
+[2026-10-23 00:53:38] Waitlisted student STU0002 in course COMP603
+[2026-10-23 00:53:38] Waitlisted student STU0003 in course COMP603
+[2026-10-23 00:53:38] Promoted waitlisted student STU0002 into course COMP603
+[2026-10-23 00:53:38] Withdrew student STU0001 from course COMP603
+[2026-10-23 00:53:38] Added student STU0001 (Nishal Biju)
+[2026-10-23 00:53:39] Added teacher TCH001 (Dr. Vikram Bugata)
+[2026-10-23 00:53:39] Deleted teacher TCH001
+[2026-10-23 00:56:30] Added student STU0004 (Chris Brown)
+[2026-10-23 00:56:55] Deleted student STU0004
+[2026-10-23 00:57:16] Assigned teacher TCH002 to course COMP603
+[2026-10-23 00:57:34] Assigned teacher TCH001 to course COMP603
+[2026-10-23 00:57:52] Enrolled student STU0003 in course COMP603
+[2026-10-23 00:58:15] Waitlisted student STU0001 in course COMP603
+[2026-10-23 00:58:29] Promoted waitlisted student STU0001 into course COMP603
+[2026-10-23 00:58:29] Withdrew student STU0003 from course COMP603
+[2026-10-23 00:58:55] Recorded grade 85.0 for enrollment ENR00002
+[2026-10-23 00:59:14] Exported full report to reports/report_20261023_005914.txt
