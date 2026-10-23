@@ -206,6 +206,8 @@ public class StudentDAO implements CrudOperations<Student>
         }
     }
 
+    // Helper structure drafted with assistance from Claude AI; modified by Vikram to split
+    // ENROLLED_COURSE_CODES on commas and skip null/empty values — see AI Interaction Log.
     private Student mapRow(ResultSet rs) throws SQLException
     {
         Student student = new Student(
