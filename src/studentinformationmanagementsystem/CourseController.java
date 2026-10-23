@@ -8,6 +8,11 @@ import javax.swing.JOptionPane;
 /**
  * Handles button actions on the Courses tab.
  *
+ * Handler layout (actionPerformed and the add/edit/delete/assign-teacher handlers)
+ * drafted with assistance from Claude AI; modified by Nishal to add number parsing
+ * for credit points and capacity, and to pick the teacher from existing teachers
+ * instead of typing an ID — see AI Interaction Log.
+ *
  * @author Nishal Kinattukarayil Biju
  */
 public class CourseController implements ActionListener {
